@@ -1,10 +1,10 @@
-float cx = 0;     
-float cy = 0;
-float r = 30;      
-float sx = 200;    
-float sy = 100;
-float sw = 200;    
-float sh = 200;
+float circleX = 0;     
+float circleY = 0;
+float radius = 30;      
+float rectX = 200;    
+float rectY = 100;
+float rectWidth = 200;    
+float rectHeight = 200;
 
 
 void setup() {
@@ -15,39 +15,39 @@ void setup() {
 void draw() {
   background(255);
 
-  cx = mouseX;
-  cy = mouseY;
+  circleX = mouseX;
+  circleY = mouseY;
 
-  boolean hit = circleRect(cx,cy,r, sx,sy,sw,sh);
+  boolean hit = circleRect(circleX,circleY,radius,rectX,rectY,rectWidth,rectHeight);
   if (hit) {
     fill(255,0,0);
   }
   else {
     fill(0,255,0);
   }
-  rect(sx,sy, sw,sh);
+  rect(rectX,rectY, rectWidth, rectHeight);
 
   fill(0, 150);
-  ellipse(cx,cy, r*2,r*2);
+  ellipse(rectX,rectY, radius*2,radius*2);
 }
 
 
-boolean circleRect(float cx, float cy, float radius, float rx, float ry, float rw, float rh) {
+boolean circleRect(float _circleX, float _circleY, float _radius, float _rectX, float _rectY, float _rectWidth, float _rectHeight) {
 
-  float testX = cx;
-  float testY = cy;
+  float testX = _circleX;
+  float testY = _circleY;
 
-  if (cx < rx)         testX = rx;      
-  else if (cx > rx+rw) testX = rx+rw;   
-  if (cy < ry)         testY = ry;     
-  else if (cy > ry+rh) testY = ry+rh;  
+  if (_circleX < _rectX)         testX = _rectX;      
+  else if (_circleX > _rectX+_rectWidth) testX = _rectX+_rectWidth;   
+  if (_circleY < _rectY)         testY = _rectY;     
+  else if (_circleY > _rectY+_rectHeight) testY = _rectY+_rectHeight;  
 
-  float distX = cx-testX;
-  float distY = cy-testY;
+  float distX = _circleX-testX;
+  float distY = _circleY-testY;
   float distance = sqrt( (distX*distX) + (distY*distY) );
 
 
-  if (distance <= radius) {
+  if (distance <= _radius) {
     return true;
   }
   return false;
